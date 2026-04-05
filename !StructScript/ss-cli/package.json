@@ -1,0 +1,33 @@
+{
+  "name": "structscript",
+  "version": "1.6.0",
+  "description": "StructScript — a clean, readable scripting language. Includes CLI runner, web compiler, and input() support.",
+  "author": "coolguysayshi",
+  "license": "MIT",
+  "homepage": "https://struct.coolguysayshi.uk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coolguysayshi/structscript"
+  },
+  "keywords": [
+    "structscript",
+    "scripting",
+    "language",
+    "interpreter",
+    "cli"
+  ],
+  "main": "lib/interpreter.js",
+  "bin": {
+    "ss": "bin/ss.js",
+    "ss-web": "bin/web.js"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StructScript Playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">
+        <svg class="logo-icon" width="32" height="32" viewBox="0 0 52 52" fill="none">
+          <path d="M26 3 L47 14.5 L47 37.5 L26 49 L5 37.5 L5 14.5 Z" fill="#0b7a75"/>
+          <path d="M20 17 L16 20 C14.5 21 14.5 22.5 16 23.5 L16 28.5 C14.5 29.5 14.5 31 16 32 L20 35" stroke="#b8f000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M32 17 L36 20 C37.5 21 37.5 22.5 36 23.5 L36 28.5 C37.5 29.5 37.5 31 36 32 L32 35" stroke="#b8f000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="26" cy="26" r="2.5" fill="#b8f000"/>
+        </svg>
+        <span class="logo-text">StructScript</span>
+        <span class="logo-tag">playground</span>
+      </div>
+      <nav class="tabs">
+        <button class="tab active" data-tab="script">script</button>
+        <button class="tab" data-tab="web">web <span class="badge">new</span></button>
+        <button class="tab" data-tab="lab">feature lab <span class="badge beta">beta</span></button>
+      </nav>
+    </div>
+    <div class="header-right">
+      <button class="btn-ghost" id="btn-examples">examples</button>
+      <button class="btn-ghost" id="btn-share">share snippet</button>
+      <a class="btn-lime" href="https://www.npmjs.com/package/structscript" target="_blank">npm install ↗</a>
+    </div>
+  </header>
+
+  <!-- MAIN PANELS -->
+  <div class="workspace">
+
+    <!-- EDITOR PANEL -->
+    <div class="panel editor-panel">
+      <div class="panel-bar">
+        <div class="panel-bar-left">
+          <span class="file-name" id="file-name">main.ss</span>
+          <span class="file-dot" id="unsaved-dot" style="display:none"></span>
+        </div>
+        <div class="panel-bar-right">
+          <button class="btn-run" id="btn-run">
+            <span class="run-tri"></span> run
+          </button>
+        </div>
+      </div>
+      <div class="editor-wrap">
+        <div class="line-numbers" id="line-numbers"></div>
+        <textarea class="editor" id="editor" spellcheck="false" autocomplete="off" autocorrect="off"></textarea>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="divider" id="divider"></div>
+
+    <!-- OUTPUT / PREVIEW PANEL -->
+    <div class="panel output-panel" id="output-panel">
+      <div class="panel-bar">
+        <div class="panel-bar-left">
+          <span class="out-label" id="out-label">output</span>
+        </div>
+        <div class="panel-bar-right">
+          <span class="status-badge" id="status-badge"></span>
+          <button class="btn-ghost small" id="btn-clear">clear</button>
+        </div>
+      </div>
+
+      <!-- Script output -->
+      <div class="output-body" id="output-body">
+        <div class="output-welcome">
+          <div class="welcome-logo">
+            <svg width="48" height="48" viewBox="0 0 52 52" fill="none">
+              <path d="M26 3 L47 14.5 L47 37.5 L26 49 L5 37.5 L5 14.5 Z" fill="#0b7a75"/>
+              <path d="M20 17 L16 20 C14.5 21 14.5 22.5 16 23.5 L16 28.5 C14.5 29.5 14.5 31 16 32 L20 35" stroke="#b8f000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M32 17 L36 20 C37.5 21 37.5 22.5 36 23.5 L36 28.5 C37.5 29.5 37.5 31 36 32 L32 35" stroke="#b8f000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <circle cx="26" cy="26" r="2.5" fill="#b8f000"/>
+            </svg>
+          </div>
+          <p class="welcome-text">Write some StructScript and hit <kbd>run</kbd></p>
+          <p class="welcome-sub">Ctrl+Enter to run · Ctrl+L to clear</p>
+        </div>
+      </div>
+
+      <!-- Web preview iframe -->
+      <div class="web-preview" id="web-preview" style="display:none">
+        <iframe id="preview-frame" sandbox="allow-scripts"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FEATURE LAB PANEL -->
+  <div class="feature-bar" id="feature-bar" style="display:none">
+    <span class="feat-label">experimental flags:</span>
+    <label class="feat-pill" data-feat="arrays">
+      <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      arrays
+    </label>
+    <label class="feat-pill" data-feat="match">
+      <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      match expressions
+    </label>
+    <label class="feat-pill" data-feat="classes">
+      <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      classes
+    </label>
+    <label class="feat-pill" data-feat="async">
+      <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      async / await
+    </label>
+    <label class="feat-pill" data-feat="web">
+      <span class="toggle-track"><span class="toggle-thumb"></span></span>
+      web mode (page {})
+    </label>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <span class="sb-left" id="sb-version">StructScript Playground · v1.2.0</span>
+    <span class="sb-right" id="sb-cursor">Ln 1, Col 1</span>
+  </div>
+
+</div>
+
+<!-- EXAMPLES DRAWER -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <span>examples</span>
+    <button class="drawer-close" id="drawer-close">✕</button>
+  </div>
+  <div class="drawer-list" id="drawer-list"></div>
+</div>
+
+<script src="interpreter.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
